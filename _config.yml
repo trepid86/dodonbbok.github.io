@@ -1,0 +1,5 @@
+title: "주간 핫 주식 분석"
+description: "매주 토요일 자동 발행되는 주식 분석 블로그"
+theme: minima
+lang: ko
+permalink: /:year/:month/:day/:title/
