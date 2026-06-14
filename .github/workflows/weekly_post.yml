@@ -1,0 +1,33 @@
+name: 주간 주식 분석 자동 포스팅
+
+on:
+  schedule:
+    - cron: '0 0 * * 6'
+  workflow_dispatch:
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: 패키지 설치
+      run: pip install anthropic
+
+    - name: 포스트 생성
+      env:
+        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      run: python generate_post.py
+
+    - name: GitHub Push
+      run: |
+        git config user.name "github-actions"
+        git config user.email "actions@github.com"
+        git add _posts/
+        git commit -m "📈 주간 핫 주식 분석 자동 발행"
+        git push
