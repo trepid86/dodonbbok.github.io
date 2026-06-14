@@ -17,11 +17,11 @@ jobs:
         python-version: '3.11'
 
     - name: 패키지 설치
-      run: pip install anthropic
+      run: pip install google-generativeai
 
     - name: 포스트 생성
       env:
-        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       run: python generate_post.py
 
     - name: GitHub Push
